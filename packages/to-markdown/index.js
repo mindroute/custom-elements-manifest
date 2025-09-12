@@ -221,7 +221,7 @@ export function makeModuleDoc(mod, options) {
 
       const nodes = [
         !['mixin', 'class'].includes(kind) ? null : makeHeading(decl),
-        ...optionEnabled(omittedSections.description) ? makeDescription(decl) : [],
+        ...['mixin', 'class'].includes(kind) && optionEnabled(omittedSections.description) ? makeDescription(decl) : [],
         ...optionEnabled(omittedSections.superClass) ? makeTable('Superclass', [CELLS.NAME, 'module', 'package'], [decl.superclass]) : [],
         ...optionEnabled(omittedSections.mixins) ? makeTable('Mixins', [CELLS.NAME, 'module', 'package'], decl.mixins) : [],
         ...kind === 'mixin' && optionEnabled(omittedSections.mixins) ?  makeTable('Parameters', [CELLS.NAME, CELLS.TYPE, CELLS.DEFAULT, 'description'], decl.parameters) : [],
